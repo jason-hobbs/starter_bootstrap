@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require gritter
 //= require_tree .
+
+
+jQuery.extend($.gritter.options,{time:1000,});

@@ -89,6 +89,7 @@ GEM
     fastercsv (1.5.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gritter (1.2.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -233,6 +234,7 @@ DEPENDENCIES
   byebug
   coffee-rails
   dotenv-rails
+  gritter
   haml-rails
   jbuilder
   jquery-rails

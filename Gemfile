@@ -11,7 +11,7 @@ gem 'turbolinks', :git => 'https://github.com/rails/turbolinks.git'
 gem 'jbuilder'
 gem 'sdoc', group: :doc
 gem 'bcrypt'
-
+gem 'gritter'
 gem 'haml-rails'
 gem 'dotenv-rails'
 gem 'pg'
