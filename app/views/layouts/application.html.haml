@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title StarterBootstrap
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} Project name
+        #navbar.navbar-collapse.collapse
+          = link_to "Sign Up", register_path, class: "btn btn-primary navbar-btn navbar-right btn-margin-left"
+          = link_to "Sign In", sign_in_path, class: "btn btn-primary navbar-btn navbar-right btn-margin-right"
+    = yield
+    = render 'layouts/messages'
+    .container
+      %hr
+        %footer
+          %p &copy; Company 2014
