@@ -53,6 +53,7 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bootstrap_form (2.3.0)
     brakeman (3.1.0)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -229,6 +230,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-sass
+  bootstrap_form
   brakeman
   bullet
   byebug

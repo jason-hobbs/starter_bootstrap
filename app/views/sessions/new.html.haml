@@ -1,19 +1,18 @@
 .container
   .row
     .col-sm-10.col-sm-offset-1
-      = form_tag sessions_path, class: 'sign_in' do
-        %header
-          %h1 Sign in
-        %fieldset
-          .form-group
-            = label_tag :email, "Email Address"
-            .row
-              .col-sm-4
-                = email_field_tag :email
-          .form-group
-            = label_tag :password, "Password"
-            .row
-              .col-sm-4
-                = password_field_tag :password
-        %fieldset.form-group.action
-          %input(type="submit" value="Sign in" class="btn btn-default")
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Sign In
+        .panel-body
+          = bootstrap_form_tag url: '/sessions', class: 'sign_in' do |f|
+            %fieldset
+              .form-group
+                .row
+                  .col-md-6
+                    = f.email_field :email, icon: "user", label: "Email Address"
+                .row
+                  .col-md-6
+                    = f.password_field :password, label: "Password"
+            %fieldset.form-group.action
+              %input(type="submit" value="Sign in" class="btn btn-default")
