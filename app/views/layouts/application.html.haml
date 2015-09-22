@@ -14,7 +14,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{:href => "#"} Project name
+          = link_to "Project Name", root_path, class: "navbar-brand"
         #navbar.navbar-collapse.collapse
           = link_to "Sign Up", register_path, class: "btn btn-primary navbar-btn navbar-right btn-margin-left"
           = link_to "Sign In", sign_in_path, class: "btn btn-primary navbar-btn navbar-right btn-margin-right"
