@@ -1,0 +1,16 @@
+= bootstrap_form_for @user do |f|
+  %fieldset
+    .form-group
+      .row
+        .col-md-6
+          = f.text_field :name, icon: "user", label: "Name"
+      .row
+        .col-md-6
+          = f.email_field :email, label: "Email Address"
+      .row
+        .col-md-6
+          = f.password_field :password, label: "Password"
+      .row
+        .col-md-6
+          = f.password_field :password_confirmation, label: "Password again"
+    = f.submit "Sign Up", class: "btn btn-default"

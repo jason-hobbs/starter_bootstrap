@@ -15,5 +15,8 @@
                 .row
                   .col-md-6
                     = f.password_field :password, label: "Password"
+                .row
+                  .col-md-6
+                    = f.check_box :remember_me
             %fieldset.form-group.action
               %input(type="submit" value="Sign in" class="btn btn-default")
