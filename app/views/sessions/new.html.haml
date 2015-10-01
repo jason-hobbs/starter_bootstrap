@@ -1,7 +1,8 @@
 %br/
 .container
   .row
-    .col-sm-10.col-sm-offset-1
+    .col-sm-2
+    .col-sm-8
       .panel.panel-default
         .panel-heading
           %h3.panel-title Sign In
@@ -10,13 +11,14 @@
             %fieldset
               .form-group
                 .row
-                  .col-md-6
+                  .col-sm-12
                     = f.email_field :email, icon: "user", label: "Email Address"
                 .row
-                  .col-md-6
+                  .col-sm-12
                     = f.password_field :password, label: "Password"
                 .row
-                  .col-md-6
+                  .col-sm-12
                     = f.check_box :remember_me
             %fieldset.form-group.action
               %input(type="submit" value="Sign in" class="btn btn-default")
+    .col-sm-2
