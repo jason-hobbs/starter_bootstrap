@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def new
     if current_user
       unless current_user_admin?
-        redirect_to root_path, notice: "already signed in!"
+        redirect_to root_path, :gflash => { :notice => "Already signed in!" }
       end
     else
   	  @user=User.new
@@ -18,8 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       unless current_user_admin?
-  	     session[:user_id] = @user.id
-    	  redirect_to root_path, notice: "Thanks for signing up!"
+  	    session[:user_id] = @user.id
+    	  redirect_to root_path, :gflash => { :success => "Thanks for signing up!" }
       else
         redirect_to root_path
       end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     @feeds = Feed.all
 		if @user.update(user_params)
-    	redirect_to @user, notice: "Account successfully updated!"
+    	redirect_to @user, :gflash => { :success => "Account updated!" }
   	else
     	render :edit
   	end
