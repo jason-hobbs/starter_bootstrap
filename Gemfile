@@ -16,6 +16,7 @@ gem 'gritter'
 gem 'haml-rails'
 gem 'dotenv-rails'
 gem 'pg'
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'brakeman'
