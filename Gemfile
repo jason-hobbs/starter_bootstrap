@@ -33,5 +33,6 @@ group :development, :test do
   gem 'byebug'
 end
 group :test do
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
