@@ -17,6 +17,7 @@ gem 'haml-rails'
 gem 'dotenv-rails'
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :development do
   gem 'brakeman'
