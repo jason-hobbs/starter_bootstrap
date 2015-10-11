@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_signin, except: [:new, :create]
 
   def new
     if current_user
