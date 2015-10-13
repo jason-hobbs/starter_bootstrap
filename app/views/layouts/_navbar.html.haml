@@ -14,8 +14,9 @@
             -#%a{:href => "#"} Link
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-              = @user.name
-              %span.caret
+              - if @user
+                = @user.name
+                %span.caret
             %ul.dropdown-menu
               %li
                 = link_to '<i class="glyphicon glyphicon-log-out"></i> Sign Out'.html_safe, sign_out_path
