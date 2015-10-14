@@ -7,6 +7,19 @@ DatabaseCleaner.clean
 user = User.create!(user_attributes)
 
 describe UsersController do
+  context "when signed in" do
+    before do
+      session[:user_id] = user
+    end
+    it "redirects to home page if not admin" do
+      get :new, id: user
+      expect(response).to redirect_to(root_path)
+    end
+    #it "gets user on show" do
+    #  get :show, id: user
+    #  expect(@user).to eq(user)
+    #end
+  end
   context "when not signed in" do
     before do
       session[:user_id] = nil

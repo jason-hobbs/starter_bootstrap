@@ -31,12 +31,10 @@ class UsersController < ApplicationController
 
 	def edit
   		@user = User.find(params[:id])
-      @feeds = Feed.order(:title)
 	end
 
 	def update
   	@user = User.find(params[:id])
-    @feeds = Feed.all
 		if @user.update(user_params)
     	redirect_to @user, :gflash => { :success => "Account updated!" }
   	else
@@ -47,16 +45,16 @@ class UsersController < ApplicationController
   private
 
 	def user_params
-  	  params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
 	end
 
 	def require_correct_user
-      @user = User.find(params[:id])
-      redirect_to root_url unless current_user?(@user)
+    @user = User.find(params[:id])
+    redirect_to root_url unless current_user?(@user)
   end
 
   def require_correct_user_or_admin
-      @user = User.find(params[:id])
-      redirect_to root_url unless current_user?(@user) || current_user_admin?
+    @user = User.find(params[:id])
+    redirect_to root_url unless current_user?(@user) || current_user_admin?
   end
 end
