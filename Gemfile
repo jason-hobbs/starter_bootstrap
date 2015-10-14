@@ -18,6 +18,7 @@ gem 'dotenv-rails'
 gem 'pg'
 gem 'rails_12factor', group: :production
 gem 'codeclimate-test-reporter', group: :test, require: nil
+gem 'simplecov', :require => false, :group => :test
 
 group :development do
   gem 'brakeman'

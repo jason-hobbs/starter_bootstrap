@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
+  before_action :require_correct_user_or_admin, only: [:edit, :show, :update]
 
   def new
     if current_user
@@ -30,7 +31,6 @@ class UsersController < ApplicationController
   end
 
 	def edit
-  		@user = User.find(params[:id])
 	end
 
 	def update

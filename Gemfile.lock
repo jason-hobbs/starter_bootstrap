@@ -274,6 +274,7 @@ DEPENDENCIES
   sass-rails
   sdoc
   shoulda-matchers
+  simplecov
   spring
   thin
   traceroute

@@ -9,7 +9,16 @@ user = User.create!(user_attributes)
 describe UsersController do
   context "when signed in" do
     before do
-      session[:user_id] = user
+      session[:user_id] = user.id
+    end
+    it "edits the current user" do
+      get :edit, id: user
+      expect(response).to render_template(:edit)
+    end
+    it "redirects when editing a different user and not admin" do
+      user2 = User.create!(user_attributes2)
+      get :edit, id: user2
+      expect(response).to redirect_to(root_path)
     end
     it "redirects to home page if not admin" do
       get :new, id: user
