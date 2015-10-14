@@ -15,10 +15,14 @@ describe UsersController do
       get :new, id: user
       expect(response).to redirect_to(root_path)
     end
-    #it "gets user on show" do
-    #  get :show, id: user
-    #  expect(@user).to eq(user)
-    #end
+    it "redirects to home page after create" do
+      post :create, user: { name: 'Sideshow', email: 'Bob@test.com', password: 'Testing1' }
+      expect(response).to redirect_to(root_path)
+    end
+    it "renders new if create fails" do
+      post :create, user: { email: 'Bob@test.com', password: 'Testing1' }
+      expect(response).to render_template(:new)
+    end
   end
   context "when not signed in" do
     before do
