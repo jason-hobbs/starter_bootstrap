@@ -19,6 +19,14 @@ describe UsersController do
       post :create, user: { name: 'Sideshow', email: 'Bob@test.com', password: 'Testing1' }
       expect(response).to redirect_to(root_path)
     end
+    it "redirects to home page after create and user is an admin" do
+      user2 = User.last
+      user2.admin == true
+      user2.save
+      session[:user_id] = user2
+      post :create, user: { name: 'Sideshow', email: 'Bob2@test.com', password: 'Testing1' }
+      expect(response).to redirect_to(root_path)
+    end
     it "renders new if create fails" do
       post :create, user: { email: 'Bob@test.com', password: 'Testing1' }
       expect(response).to render_template(:new)
