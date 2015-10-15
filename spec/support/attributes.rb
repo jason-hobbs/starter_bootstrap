@@ -15,3 +15,13 @@
       password: "Testing1"
     }.merge(overrides)
   end
+
+  def user_attributes3(overrides = {})
+    {
+      id: 36,
+      name: "Billy Wallace",
+      email: "billy.wallace@scotland.com",
+      password: "Testing1",
+      admin: "true"
+    }.merge(overrides)
+  end

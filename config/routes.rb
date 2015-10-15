@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   get 'register' => 'users#new'
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
-  resources :users, only: [:create, :show, :edit, :update, :destroy]
+  resources :users
   resources :sessions, only: [:create]
 end

@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
   before_action :require_correct_user_or_admin, only: [:edit, :show, :update]
+  before_action :require_admin, only: [:index]
+
+  def index
+    @user = User.find(session[:user_id])
+  end
 
   def new
     if current_user

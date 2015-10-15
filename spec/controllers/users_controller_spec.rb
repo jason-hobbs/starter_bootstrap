@@ -15,6 +15,16 @@ describe UsersController do
       get :show, id: user
       expect(response).to render_template(:show)
     end
+    it "gets index and redirects to root because not an admin" do
+      get :index
+      expect(response).to redirect_to(root_path)
+    end
+    it "get index if an admin" do
+      user3 = User.create!(user_attributes3)
+      session[:user_id] = user3.id
+      get :index
+      expect(response).to render_template(:index)
+    end
     it "should update user" do
       patch :update, id: user, user: {:email => "john.doe@example1.com"}
       expect(user.reload.email).to eq("john.doe@example1.com")
