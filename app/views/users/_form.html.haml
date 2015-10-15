@@ -13,4 +13,7 @@
       .row
         .col-sm-12
           = f.password_field :password_confirmation, hide_label: true, icon: "eye-close", placeholder: "Password again"
-    = f.submit "Sign Up", class: "btn btn-default"
+    - if params[:action] == "edit"
+      = f.submit "Edit", class: "btn btn-default"
+    - else
+      = f.submit "Sign Up", class: "btn btn-default"

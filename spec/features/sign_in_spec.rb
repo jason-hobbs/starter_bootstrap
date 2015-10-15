@@ -27,7 +27,7 @@ describe "Signing in" do
   it "signs in the user if the email/password combination is valid" do
     visit root_url
     click_link 'Sign In'
-    fill_in "email", with: user.email
+    fill_in "email", with: user.reload.email
     fill_in "password", with: user.password
     click_button 'Sign in'
     expect(body).to have_text("#{user.name}")

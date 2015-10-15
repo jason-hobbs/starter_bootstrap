@@ -11,6 +11,18 @@ describe UsersController do
     before do
       session[:user_id] = user.id
     end
+    it "shows the current user" do
+      get :show, id: user
+      expect(response).to render_template(:show)
+    end
+    it "should update user" do
+      patch :update, id: user, user: {:email => "john.doe@example1.com"}
+      expect(user.reload.email).to eq("john.doe@example1.com")
+    end
+    it "should not update user when email is blank" do
+      patch :update, id: user, user: {:email => ""}
+      expect(response).to render_template(:edit)
+    end
     it "edits the current user" do
       get :edit, id: user
       expect(response).to render_template(:edit)
