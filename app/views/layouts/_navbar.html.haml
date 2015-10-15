@@ -10,12 +10,10 @@
     #navbar.navbar-collapse.collapse
       - if current_user
         %ul.nav.navbar-nav.navbar-right
-          -#%li
-            -#%a{:href => "#"} Link
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               - if @user
-                = @user.name
+                = profile_image_for(@current_user, size: 30) + @user.name
                 %span.caret
             %ul.dropdown-menu
               %li
