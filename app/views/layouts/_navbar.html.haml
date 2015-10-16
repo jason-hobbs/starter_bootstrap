@@ -16,10 +16,11 @@
                 = profile_image_for(@current_user, size: 30) + @user.name
                 %span.caret
             %ul.dropdown-menu
+              - if current_user_admin?
+                %li
+                  = link_to '<i class="glyphicon glyphicon-dashboard"></i> Admin Dash'.html_safe, users_path
               %li
                 = link_to '<i class="glyphicon glyphicon-edit"></i> Edit'.html_safe, edit_user_path(@user)
-              %li
-                %a{:href => "#"} Something else here
               %li.divider{:role => "separator"}
               %li
                 = link_to '<i class="glyphicon glyphicon-log-out"></i> Sign Out'.html_safe, sign_out_path
