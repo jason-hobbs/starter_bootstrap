@@ -46,6 +46,12 @@ describe UsersController do
       get :new, id: user
       expect(response).to redirect_to(root_path)
     end
+    it "allows admin to add users" do
+      user3 = User.find_by(name: "Billy Wallace")
+      session[:user_id] = user3.id
+      get :new, id: user3
+      expect(response).to render_template(:new)
+    end
     it "redirects to home page after create" do
       post :create, user: { name: 'Sideshow', email: 'Bob@test.com', password: 'Testing1' }
       expect(response).to redirect_to(root_path)
@@ -56,11 +62,18 @@ describe UsersController do
       user2.save
       session[:user_id] = user2
       post :create, user: { name: 'Sideshow', email: 'Bob2@test.com', password: 'Testing1' }
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(users_path)
     end
     it "renders new if create fails" do
       post :create, user: { email: 'Bob@test.com', password: 'Testing1' }
       expect(response).to render_template(:new)
+    end
+    it "deletes a user if admin" do
+      user3 = User.create!(user_attributes4)
+      session[:user_id] = user3.id
+      User.create!(user_attributes5)
+      post :destroy, id: 68
+      expect(response).to redirect_to(users_path)
     end
   end
   context "when not signed in" do

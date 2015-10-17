@@ -1,16 +1,19 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
   before_action :require_correct_user_or_admin, only: [:edit, :show, :update]
-  before_action :require_admin, only: [:index]
+  before_action :require_admin, only: [:index, :destroy]
 
   def index
     @user = User.find(session[:user_id])
+    @users = User.all.order(:name)
   end
 
   def new
     if current_user
       unless current_user_admin?
         redirect_to root_path, :gflash => { :notice => "Already signed in!" }
+      else
+        @user=User.new
       end
     else
   	  @user=User.new
@@ -28,7 +31,7 @@ class UsersController < ApplicationController
   	    session[:user_id] = @user.id
     	  redirect_to root_path, :gflash => { :success => "Thanks for signing up!" }
       else
-        redirect_to root_path
+        redirect_to users_path
       end
     else
     	render :new
@@ -36,6 +39,12 @@ class UsersController < ApplicationController
   end
 
 	def edit
+	end
+
+  def destroy
+  	@user = User.find(params[:id])
+  	@user.destroy
+    redirect_to users_path
 	end
 
 	def update

@@ -13,14 +13,14 @@
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               - if @user
-                = profile_image_for(@current_user, size: 30) + @user.name
+                = profile_image_for(@current_user, size: 30) + @current_user.name
                 %span.caret
             %ul.dropdown-menu
               - if current_user_admin?
                 %li
                   = link_to '<i class="glyphicon glyphicon-dashboard"></i> Admin Dash'.html_safe, users_path
               %li
-                = link_to '<i class="glyphicon glyphicon-edit"></i> Edit'.html_safe, edit_user_path(@user)
+                = link_to '<i class="glyphicon glyphicon-edit"></i> Edit'.html_safe, edit_user_path(@current_user)
               %li.divider{:role => "separator"}
               %li
                 = link_to '<i class="glyphicon glyphicon-log-out"></i> Sign Out'.html_safe, sign_out_path
