@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:index, :destroy]
 
   def index
-    @user = User.find(session[:user_id])
+    @user = User.friendly.find(session[:user_id])
     @users = User.all.order(:name)
   end
 
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@user = User.find(params[:id])
+  	@user = User.friendly.find(params[:id])
   end
 
   def create
@@ -42,13 +42,13 @@ class UsersController < ApplicationController
 	end
 
   def destroy
-  	@user = User.find(params[:id])
+  	@user = User.friendly.find(params[:id])
   	@user.destroy
     redirect_to users_path
 	end
 
 	def update
-  	@user = User.find(params[:id])
+  	@user = User.friendly.find(params[:id])
 		if @user.update(user_params)
     	redirect_to @user, :gflash => { :success => "Account updated!" }
   	else
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 	end
 
   def require_correct_user_or_admin
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     redirect_to root_url unless current_user?(@user) || current_user_admin?
   end
 end
