@@ -1,1 +1,29 @@
-%h1 user show
+%br/
+.container
+  .row
+    .col-sm-3
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            = @current_user.name
+        .panel-body
+          .row
+            .col-sm-12
+              = profile_image_for(@current_user)
+          %br
+          .row
+            .col-sm-12
+              %h5
+                = @current_user.email
+          .row
+            .col-sm-12
+              %h5
+                member since:
+                = @current_user.created_at.strftime("%b %d %Y")
+          .row
+            .col-sm-12
+              = link_to 'Edit', edit_user_path, class: "btn btn-default"
+              = link_to 'Log out', sign_out_path, class: "btn btn-default"
+
+    .col-sm-3
