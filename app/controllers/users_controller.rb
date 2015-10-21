@@ -50,7 +50,11 @@ class UsersController < ApplicationController
 	def update
   	@user = User.friendly.find(params[:id])
 		if @user.update(user_params)
-    	redirect_to @user, :gflash => { :success => "Account updated!" }
+      if current_user_admin? && @user != @current_user
+    	  redirect_to users_path, :gflash => { :success => "Account updated!" }
+      else
+        redirect_to @current_user, :gflash => { :success => "Account updated!" }
+      end
   	else
     	render :edit
   	end

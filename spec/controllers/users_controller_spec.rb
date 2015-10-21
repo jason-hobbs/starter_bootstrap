@@ -29,6 +29,12 @@ describe UsersController do
       patch :update, id: user, user: {:email => "john.doe@example1.com"}
       expect(user.reload.email).to eq("john.doe@example1.com")
     end
+    it "should update any user if an admin" do
+      user3 = User.find_by(name: "Billy Wallace")
+      session[:user_id] = user3.id
+      patch :update, id: user, user: {:email => "john.doe@example2.com"}
+      expect(user.reload.email).to eq("john.doe@example2.com")
+    end
     it "should not update user when email is blank" do
       patch :update, id: user, user: {:email => ""}
       expect(response).to render_template(:edit)
