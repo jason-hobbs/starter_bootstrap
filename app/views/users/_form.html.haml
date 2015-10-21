@@ -13,6 +13,10 @@
       .row
         .col-sm-12
           = f.password_field :password_confirmation, hide_label: true, icon: "eye-close", placeholder: "Password again"
+      - if current_user_admin?
+        .row
+          .col-sm-12
+            = f.check_box :admin
     - if params[:action] == "edit"
       = f.submit "Edit", class: "btn btn-default"
     - else
