@@ -1,0 +1,21 @@
+%br/
+.container
+  .row
+    .col-sm-3
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Forgot Password
+        .panel-body
+          .row
+            .col-sm-12
+              %p Enter the email you signed up with and a new password will be emailed to you.
+          = bootstrap_form_tag url: '/reset_password' do |f|
+            %fieldset
+              .form-group
+                .row
+                  .col-sm-12
+                    = f.email_field :email, icon: "envelope", hide_label: true, placeholder: "Email Address"
+            %fieldset.form-group.action
+              %input(type="submit" value="Reset Password" class="btn btn-default")
+    .col-sm-3

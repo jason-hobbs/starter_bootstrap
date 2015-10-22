@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_signin, except: [:new, :create]
+  before_action :require_signin, except: [:new, :create, :forgot, :reset]
   before_action :require_correct_user_or_admin, only: [:edit, :show, :update]
   before_action :require_admin, only: [:index, :destroy]
 
@@ -59,6 +59,27 @@ class UsersController < ApplicationController
     	render :edit
   	end
 	end
+
+  def forgot
+    if current_user
+      redirect_to root_path
+    end
+  end
+
+  def reset
+    if current_user
+      redirect_to root_path
+    end
+    @user = User.find_by(email: params[:email])
+    if @user
+      # create random password
+      # update database
+      # send email
+      redirect_to sign_in_path, :gflash => { :success => "New password email sent" }
+    else
+      redirect_to root_path
+    end
+  end
 
   private
 
