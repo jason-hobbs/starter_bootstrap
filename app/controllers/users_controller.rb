@@ -72,8 +72,8 @@ class UsersController < ApplicationController
     end
     @user = User.find_by(email: params[:email])
     if @user
-      # create random password
-      # update database
+      token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      @user.update_column(:reset_token, token)
       # send email
       redirect_to sign_in_path, :gflash => { :success => "New password email sent" }
     else
