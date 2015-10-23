@@ -67,9 +67,6 @@ class UsersController < ApplicationController
   end
 
   def reset
-    if current_user
-      redirect_to root_path
-    end
     @user = User.find_by(email: params[:email])
     if @user
       token = Digest::SHA1.hexdigest([Time.now, rand].join)

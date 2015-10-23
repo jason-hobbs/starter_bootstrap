@@ -15,11 +15,27 @@ describe UsersController do
       get :show, id: user
       expect(response).to render_template(:show)
     end
+    it "redirects to root page if signed in user trys the forgot password action" do
+      get :forgot
+      expect(response).to redirect_to(root_path)
+    end
+    it "redirects to root page if no email is passed to reset action" do
+      post :reset
+      expect(response).to redirect_to(root_path)
+    end
+    it "redirects to root page if email is not found in reset action" do
+      post :reset, email: "blue@bluetest.com"
+      expect(response).to redirect_to(root_path)
+    end
+    it "sends an email if email is found in reset action" do
+      post :reset, email: "william.wallace@scotland.com"
+      expect(assigns(:user).name).to eq("William Wallace")
+    end
     it "gets index and redirects to root because not an admin" do
       get :index
       expect(response).to redirect_to(root_path)
     end
-    it "get index if an admin" do
+    it "gets index if an admin" do
       user3 = User.create!(user_attributes3)
       session[:user_id] = user3.id
       get :index
