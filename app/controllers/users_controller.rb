@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     if @user
       token = Digest::SHA1.hexdigest([Time.now, rand].join)
       @user.update_column(:reset_token, token)
-      # send email
+      PasswordMailer.password_mail(token, @user).deliver_now
       redirect_to sign_in_path, :gflash => { :success => "New password email sent" }
     else
       redirect_to root_path
