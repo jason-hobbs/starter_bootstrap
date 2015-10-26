@@ -79,21 +79,26 @@ class UsersController < ApplicationController
   end
 
   def new_password
-    @user = User.find_by(reset_token: params[:token])
-    unless @user
-      redirect_to root_path
+    unless params[:token]
+      return redirect_to root_path
     else
-      @token = params[:token]
+      @user = User.find_by(reset_token: params[:token])
+      unless @user
+        return redirect_to root_path
+      else
+        @token = params[:token]
+      end
     end
   end
 
   def set_pass
     @user = User.find_by(reset_token: params[:token])
+    @token = params[:token]
     if @user.update(user_params)
       @user.update_column(:reset_token, nil)
       redirect_to sign_in_path, :gflash => { :success => "Account updated!" }
     else
-      render :new_password
+      render :new_password, token: @token
     end
   end
 

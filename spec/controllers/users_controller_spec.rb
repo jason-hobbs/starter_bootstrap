@@ -102,6 +102,29 @@ describe UsersController do
     before do
       session[:user_id] = nil
     end
+    it "shows new password view from email" do
+      post :reset, email: "billy.wallace@scotland.com"
+      get :new_password, token: assigns(:token)
+      expect(assigns(:token)).to eq(assigns(:user).reset_token)
+    end
+    it "redirects to root path if new_password is requested without a token" do
+      get :new_password
+      expect(response).to redirect_to(root_path)
+    end
+    it "redirects to root path if new_password is requested with a bad token" do
+      get :new_password, token: "1231231"
+      expect(response).to redirect_to(root_path)
+    end
+    it "updates password for user with reset token" do
+      post :reset, email: "billy.wallace@scotland.com"
+      patch :set_pass, token: assigns(:token), user: {:password => "Testing1", :password_confirmation => "Testing1"}
+      expect(response).to redirect_to(sign_in_path)
+    end
+    it "renders new_password view if password does not match" do
+      post :reset, email: "billy.wallace@scotland.com"
+      patch :set_pass, token: assigns(:token), user: {:password => "Testing1", :password_confirmation => ""}
+      expect(response).to render_template(:new_password)
+    end
     it "cannot access show" do
       get :show, id: user
       expect(response).to redirect_to(sign_in_path)
