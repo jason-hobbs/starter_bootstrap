@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_signin, except: [:new, :create, :forgot, :reset]
+  before_action :require_signin, except: [:new, :create, :forgot, :reset, :new_password, :set_pass]
   before_action :require_correct_user_or_admin, only: [:edit, :show, :update]
   before_action :require_admin, only: [:index, :destroy]
 
@@ -69,19 +69,38 @@ class UsersController < ApplicationController
   def reset
     @user = User.find_by(email: params[:email])
     if @user
-      token = Digest::SHA1.hexdigest([Time.now, rand].join)
-      @user.update_column(:reset_token, token)
-      PasswordMailer.password_mail(token, @user).deliver_now
+      @token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      @user.update_column(:reset_token, @token)
+      PasswordMailer.password_mail(@token, @user).deliver_now
       redirect_to sign_in_path, :gflash => { :success => "New password email sent" }
     else
       redirect_to root_path
     end
   end
 
+  def new_password
+    @user = User.find_by(reset_token: params[:token])
+    unless @user
+      redirect_to root_path
+    else
+      @token = params[:token]
+    end
+  end
+
+  def set_pass
+    @user = User.find_by(reset_token: params[:token])
+    if @user.update(user_params)
+      @user.update_column(:reset_token, nil)
+      redirect_to sign_in_path, :gflash => { :success => "Account updated!" }
+    else
+      render :new_password
+    end
+  end
+
   private
 
 	def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :reset_token)
 	end
 
   def require_correct_user_or_admin
