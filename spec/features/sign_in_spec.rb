@@ -32,6 +32,14 @@ describe "Signing in" do
     click_button 'Sign in'
     expect(body).to have_text("#{user.name}")
   end
+  it "signs in the user if the name/password combination is valid" do
+    visit root_url
+    click_link 'Sign In'
+    fill_in "email", with: user.name
+    fill_in "password", with: user.password
+    click_button 'Sign in'
+    expect(body).to have_text("#{user.name}")
+  end
   it "does not sign in the user if the email/password combination is invalid" do
     visit root_url
     click_link 'Sign In'
