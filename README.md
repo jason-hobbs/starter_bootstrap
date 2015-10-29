@@ -4,7 +4,7 @@
 
 This is a starter site for Ruby on Rails apps.
 It has bootstrap, gritter notifications, postgresql, gravatar, and an authentication system built in.
-[Demo here](https://starter-bootstrap.heroku.com).
+[Demo here](http://starter-bootstrap.heroku.com).
 
 Clone to a folder, then:  
 &nbsp;&nbsp;Create a file in the root of the folder named: .env  
