@@ -6,9 +6,9 @@ This is a starter site for Ruby on Rails apps.
 It has bootstrap, gritter notifications, postgresql, gravatar, and an authentication system built in.
 [Demo here](https://starter-bootstrap.heroku.com).
 
-Clone to a folder, then:
-  Create a file in the root of the folder named: .env
-  copy and paste the following with any changes you want:
+Clone to a folder, then:  
+&nbsp;&nbsp;Create a file in the root of the folder named: .env  
+&nbsp;&nbsp;copy and paste the following with any changes you want:  
 
 ```
   DATABASE_USER=user
