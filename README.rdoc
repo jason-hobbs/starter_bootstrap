@@ -38,3 +38,8 @@ Helpers:
   current_user - Gets currently logged in user
   current_user? - Is a user logged in
   current_user_admin? - is current_user an admin
+
+
+Password reset is sent using Gmail.  To use Mandrill, Mailgun, etc. just
+edit the config/environments/development.rb and production.rb changing the
+settings in config.action_mailer.smtp_settings.
