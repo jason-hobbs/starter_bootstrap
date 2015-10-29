@@ -1,15 +1,16 @@
 {<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/gpa.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap]
 {<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/coverage.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap/coverage]
-== Starter_Bootstrap
+###Starter_Bootstrap
 
 This is a starter site for Ruby on Rails apps.
 It has bootstrap, gritter notifications, postgresql, gravatar, and an authentication system built in.
-[Demo here.](https://starter-bootstrap.heroku.com)
+[Demo here](https://starter-bootstrap.heroku.com).
 
 Clone to a folder, then:
   Create a file in the root of the folder named: .env
   copy and paste the following with any changes you want:
-  ```
+
+```
   DATABASE_USER=user
   DATABASE_PASSWORD=password
   DEV_DATABASE_NAME=starter_bootstrap_dev
@@ -19,25 +20,31 @@ Clone to a folder, then:
   GMAIL_PASSWORD=password
   HOST_PROTOCOL=http://
   HOST_DOMAIN=localhost:3000
-  ```
+```
 Then run:
 
-`bundle`
-`rake db:migrate`
+```
+bundle
+rake db:migrate
+```
 
-Run `rspec` to run all tests.
+Run:
+```
+rspec
+```
+to run all tests.
 
 Then just add your own Models, Views, and Controllers!
 
 Filters:
-  before_action :require_signin
-  before_action :require_correct_user_or_admin
-  before_action :require_admin
+&nbsp;before_action :require_signin
+&nbsp;before_action :require_correct_user_or_admin
+&nbsp;before_action :require_admin
 
 Helpers:
-  current_user - Gets currently logged in user
-  current_user? - Is a user logged in
-  current_user_admin? - is current_user an admin
+&nbsp;current_user - Gets currently logged in user
+&nbsp;current_user? - Is a user logged in
+&nbsp;current_user_admin? - is current_user an admin
 
 
 Password reset is sent using Gmail.  To use Mandrill, Mailgun, etc. just
