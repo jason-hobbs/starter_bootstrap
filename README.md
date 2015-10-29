@@ -25,8 +25,12 @@ Then run:
 
 ```
 bundle
+rake db:create
 rake db:migrate
+rake db:seed
 ```
+
+Look at db/seeds.rb for the default user and admin logins.
 
 Run:
 ```
