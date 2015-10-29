@@ -36,15 +36,15 @@ to run all tests.
 
 Then just add your own Models, Views, and Controllers!
 
-Filters:
-&nbsp;before_action :require_signin
-&nbsp;before_action :require_correct_user_or_admin
-&nbsp;before_action :require_admin
+Filters:  
+&nbsp;&nbsp;before_action :require_signin  
+&nbsp;&nbsp;before_action :require_correct_user_or_admin  
+&nbsp;&nbsp;before_action :require_admin  
 
-Helpers:
-&nbsp;current_user - Gets currently logged in user
-&nbsp;current_user? - Is a user logged in
-&nbsp;current_user_admin? - is current_user an admin
+Helpers:  
+&nbsp;&nbsp;current_user - Gets currently logged in user  
+&nbsp;&nbsp;current_user? - Is a user logged in  
+&nbsp;&nbsp;current_user_admin? - is current_user an admin  
 
 
 Password reset is sent using Gmail.  To use Mandrill, Mailgun, etc. just
