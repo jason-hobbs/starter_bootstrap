@@ -44,4 +44,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :get_user
 
+  def require_correct_user_or_admin
+    @user = User.friendly.find(params[:id])
+    redirect_to root_url unless current_user?(@user) || current_user_admin?
+  end
+
+  helper_method :require_correct_user_or_admin
+
 end

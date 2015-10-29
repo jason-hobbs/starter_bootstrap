@@ -1,30 +1,40 @@
 {<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/gpa.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap]
 {<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/coverage.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap/coverage]
-== README
+== Starter_Bootstrap
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a starter site for Ruby on Rails apps.
+It has bootstrap, gritter notifications, postgresql, gravatar, and an authentication system built in.
+[Demo here.](https://starter-bootstrap.heroku.com)
 
-Things you may want to cover:
+Clone to a folder, then:
+  Create a file in the root of the folder named: .env
+  copy and paste the following with any changes you want:
+  ```
+  DATABASE_USER=user
+  DATABASE_PASSWORD=password
+  DEV_DATABASE_NAME=starter_bootstrap_dev
+  TEST_DATABASE_NAME=starter_bootstrap_test
+  DATABASE_NAME=starter_bootstrap
+  GMAIL_USERNAME=user@gmail.com
+  GMAIL_PASSWORD=password
+  HOST_PROTOCOL=http://
+  HOST_DOMAIN=localhost:3000
+  ```
+Then run:
 
-* Ruby version
+`bundle`
+`rake db:migrate`
 
-* System dependencies
+Run `rspec` to run all tests.
 
-* Configuration
+Then just add your own Models, Views, and Controllers!
 
-* Database creation
+Filters:
+  before_action :require_signin
+  before_action :require_correct_user_or_admin
+  before_action :require_admin
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Helpers:
+  current_user - Gets currently logged in user
+  current_user? - Is a user logged in
+  current_user_admin? - is current_user an admin
