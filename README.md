@@ -1,5 +1,7 @@
-{<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/gpa.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap]
-{<img src="https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/coverage.svg" />}[https://codeclimate.com/github/jason-hobbs/starter_bootstrap/coverage]
+[![Code Climate](https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/gpa.svg)](https://codeclimate.com/github/jason-hobbs/starter_bootstrap)
+
+[![Test Coverage](https://codeclimate.com/github/jason-hobbs/starter_bootstrap/badges/coverage.svg)](https://codeclimate.com/github/jason-hobbs/starter_bootstrap/coverage)
+
 ###Starter_Bootstrap
 
 This is a starter site for Ruby on Rails apps.
