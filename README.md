@@ -4,6 +4,7 @@
 
 This is a starter site for Ruby on Rails apps.
 It has bootstrap, gritter notifications, postgresql, gravatar, and an authentication system built in.
+Uses Ruby 2.2.3, Rails 4.2.4 and turbolinks 3.
 [Demo here](http://starter-bootstrap.heroku.com).
 
 Clone to a folder, then:  
