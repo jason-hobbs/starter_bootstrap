@@ -96,7 +96,8 @@ class UsersController < ApplicationController
     @token = params[:token]
     if @user.update(user_params)
       @user.update_column(:reset_token, nil)
-      redirect_to sign_in_path, :gflash => { :success => "Account updated!" }
+      session[:user_id] = @user.id
+      redirect_to root_path, :gflash => { :success => "Account updated!" }
     else
       render :new_password, token: @token
     end

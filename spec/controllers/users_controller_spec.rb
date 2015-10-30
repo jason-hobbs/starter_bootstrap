@@ -118,7 +118,7 @@ describe UsersController do
     it "updates password for user with reset token" do
       post :reset, email: "billy.wallace@scotland.com"
       patch :set_pass, token: assigns(:token), user: {:password => "Testing1", :password_confirmation => "Testing1"}
-      expect(response).to redirect_to(sign_in_path)
+      expect(response).to redirect_to(root_path)
     end
     it "renders new_password view if password does not match" do
       post :reset, email: "billy.wallace@scotland.com"
