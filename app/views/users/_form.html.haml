@@ -9,10 +9,10 @@
           = f.email_field :email, icon: "envelope", hide_label: true, placeholder: "Email Address"
       .row
         .col-sm-12
-          = f.password_field :password, icon: "eye-close", hide_label: true, placeholder: "Password"
+          = f.password_field :password, icon: "asterisk", hide_label: true, placeholder: "Password"
       .row
         .col-sm-12
-          = f.password_field :password_confirmation, hide_label: true, icon: "eye-close", placeholder: "Password again"
+          = f.password_field :password_confirmation, hide_label: true, icon: "asterisk", placeholder: "Password again"
       - if current_user_admin?
         .row
           .col-sm-12
