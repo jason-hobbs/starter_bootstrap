@@ -9,7 +9,9 @@ user = User.create!(user_attributes)
 describe UsersController do
   context "when signed in" do
     before do
-      session[:user_id] = user.id
+      user.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      user.save
+      session[:session_token] = user.session_token
     end
     it "shows the current user" do
       get :show, id: user
@@ -37,7 +39,9 @@ describe UsersController do
     end
     it "gets index if an admin" do
       user3 = User.create!(user_attributes3)
-      session[:user_id] = user3.id
+      user3.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      user3.save
+      session[:session_token] = user3.session_token
       get :index
       expect(response).to render_template(:index)
     end
@@ -47,9 +51,19 @@ describe UsersController do
     end
     it "should update any user if an admin" do
       user3 = User.find_by(name: "Billy Wallace")
-      session[:user_id] = user3.id
+      user3.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      user3.save
+      session[:session_token] = user3.session_token
       patch :update, id: user, user: {:email => "john.doe@example2.com"}
       expect(user.reload.email).to eq("john.doe@example2.com")
+    end
+    it "should update any user if an admin and redirect to admin dashboard" do
+      user3 = User.find_by(name: "Billy Wallace")
+      user3.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      user3.save
+      session[:session_token] = user3.session_token
+      patch :update, id: user, user: {:email => "john.doe@example2.com"}
+      expect(response).to redirect_to(users_path)
     end
     it "should not update user when email is blank" do
       patch :update, id: user, user: {:email => ""}
@@ -65,25 +79,26 @@ describe UsersController do
       expect(response).to redirect_to(root_path)
     end
     it "redirects to home page if not admin" do
+      session[:session_token] = user.session_token
       get :new, id: user
       expect(response).to redirect_to(root_path)
     end
     it "allows admin to add users" do
       user3 = User.find_by(name: "Billy Wallace")
-      session[:user_id] = user3.id
+      session[:session_token] = user3.session_token
       get :new, id: user3
       expect(response).to render_template(:new)
     end
     it "redirects to home page after create" do
-      post :create, user: { name: 'Sideshow', email: 'Bob@test.com', password: 'Testing1' }
+      post :create, user: { name: 'Sideshow', email: 'Bob@test.com', password: 'Testing1', session_token: 'c86ce2af3d742f2af2a6c5a9740435854a4e051b' }
       expect(response).to redirect_to(root_path)
     end
     it "redirects to home page after create and user is an admin" do
       user2 = User.last
       user2.admin == true
       user2.save
-      session[:user_id] = user2
-      post :create, user: { name: 'Sideshow', email: 'Bob2@test.com', password: 'Testing1' }
+      session[:session_token] = user2.session_token
+      post :create, user: { name: 'Sideshow', email: 'Bob2@test.com', password: 'Testing1', session_token: 'c5e04a9936fc4ccc54c71f123739a3f892145208' }
       expect(response).to redirect_to(users_path)
     end
     it "renders new if create fails" do
@@ -92,7 +107,9 @@ describe UsersController do
     end
     it "deletes a user if admin" do
       user3 = User.create!(user_attributes4)
-      session[:user_id] = user3.id
+      user3.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+      user3.save
+      session[:session_token] = user3.session_token
       User.create!(user_attributes5)
       post :destroy, id: 68
       expect(response).to redirect_to(users_path)

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by(session_token: session[:session_token]) if session[:session_token]
     rescue ActiveRecord::RecordNotFound
   end
 
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_admin?
 
   def get_user
-    if session[:user_id]
+    if session[:session_token]
       @user = current_user
     end
   end

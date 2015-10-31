@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:index, :destroy]
 
   def index
-    @user = User.friendly.find(session[:user_id])
+    @user = User.find_by(session_token: session[:session_token])
     @users = User.all.order(:name)
   end
 
@@ -16,49 +16,50 @@ class UsersController < ApplicationController
         @user=User.new
       end
     else
-  	  @user=User.new
+      @user=User.new
     end
   end
 
   def show
-  	@user = User.friendly.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
   def create
     @user = User.new(user_params)
+    @user.session_token = Digest::SHA1.hexdigest([Time.now, rand].join)
     if @user.save
       unless current_user_admin?
-  	    session[:user_id] = @user.id
-    	  redirect_to root_path, :gflash => { :success => "Thanks for signing up!" }
+        session[:session_token] = @user.session_token
+        redirect_to root_path, :gflash => { :success => "Thanks for signing up!" }
       else
         redirect_to users_path
       end
     else
-    	render :new
+      render :new
     end
   end
 
-	def edit
-	end
+  def edit
+  end
 
   def destroy
-  	@user = User.friendly.find(params[:id])
-  	@user.destroy
+    @user = User.friendly.find(params[:id])
+    @user.destroy
     redirect_to users_path
-	end
+  end
 
-	def update
-  	@user = User.friendly.find(params[:id])
-		if @user.update(user_params)
+  def update
+    @user = User.friendly.find(params[:id])
+    if @user.update(user_params)
       if current_user_admin? && @user != @current_user
-    	  redirect_to users_path, :gflash => { :success => "Account updated!" }
+        redirect_to users_path, :gflash => { :success => "Account updated!" }
       else
         redirect_to @current_user, :gflash => { :success => "Account updated!" }
       end
-  	else
-    	render :edit
-  	end
-	end
+    else
+      render :edit
+    end
+  end
 
   def forgot
     if current_user
@@ -96,7 +97,7 @@ class UsersController < ApplicationController
     @token = params[:token]
     if @user.update(user_params)
       @user.update_column(:reset_token, nil)
-      session[:user_id] = @user.id
+      session[:session_token] = @user.session_token
       redirect_to root_path, :gflash => { :success => "Account updated!" }
     else
       render :new_password, token: @token
@@ -105,8 +106,8 @@ class UsersController < ApplicationController
 
   private
 
-	def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :reset_token)
-	end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :reset_token)
+  end
 
 end

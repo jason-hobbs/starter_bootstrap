@@ -8,7 +8,7 @@ user = User.create!(user_attributes)
 describe SessionsController do
   context "when signed in" do
     before do
-      session[:user_id] = user.id
+      session[:session_token] = user.session_token
     end
     it "logs user out" do
       delete :destroy, id: user
