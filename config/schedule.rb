@@ -19,6 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, 'log/whenever.log'
+
 every 4.hours do
   runner "User.clear_reset_tokens"
 end
