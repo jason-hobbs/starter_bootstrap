@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   	Digest::MD5::hexdigest(email.downcase)
   end
 
+  def self.clear_reset_tokens
+    User.update_all(reset_token: nil)
+  end
+
 end

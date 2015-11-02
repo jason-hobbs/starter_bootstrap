@@ -20,6 +20,7 @@ gem 'rails_12factor', group: :production
 gem 'codeclimate-test-reporter', group: :test, require: nil
 gem 'simplecov', :require => false, :group => :test
 gem 'friendly_id'
+gem 'whenever', :require => false
 
 group :development do
   gem 'brakeman'
