@@ -18,8 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-
-set :output, 'log/whenever.log'
+set :environment, 'production' 
+set :output, 'tmp/whenever.log'
 
 every 4.hours do
   runner "User.clear_reset_tokens"
